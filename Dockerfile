@@ -1,6 +1,5 @@
 FROM nginx:stable
 
-
 WORKDIR /root
 
 RUN apt-get update \
@@ -9,6 +8,7 @@ RUN apt-get update \
     && wget https://dl.eff.org/certbot-auto \
     && chmod a+x ./certbot-auto \
     && sed -i '$ d' /etc/nginx/nginx.conf \
+    && echo "    client_max_body_size 20M;" >> /etc/nginx/nginx.conf \
     && echo "    include /app/sites/*.conf;" >> /etc/nginx/nginx.conf \
     && echo "}" >> /etc/nginx/nginx.conf
 
