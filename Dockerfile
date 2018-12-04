@@ -1,18 +1,13 @@
-FROM nginx:stable
+FROM nginx:stable-alpine
 
-WORKDIR /root
+LABEL name="nginx-certbot"
+LABEL maintainer="Lukáš Dorňák <lukasdornak@gmail.com>"
 
-RUN apt-get update \
-    && apt-get install -y certbot python-certbot-nginx \
-    && apt-get install -y wget \
-    && wget https://dl.eff.org/certbot-auto \
-    && chmod a+x ./certbot-auto \
-    && sed -i '$ d' /etc/nginx/nginx.conf \
-    && echo "    client_max_body_size 20M;" >> /etc/nginx/nginx.conf \
-    && echo "    include /app/sites/*.conf;" >> /etc/nginx/nginx.conf \
-    && echo "}" >> /etc/nginx/nginx.conf
+RUN apk update; \
+    apk add --update --no-cache certbot py2-pip; \
+	pip install certbot-nginx; \
 
 EXPOSE 80
 EXPOSE 443
 
-ENTRYPOINT /etc/init.d/nginx restart && /bin/bash
+ENTRYPOINT /bin/ash

@@ -1,0 +1,11 @@
+version: '2'
+services:
+  nginx-certbot:
+    image: lukasdornak/nginx-certbot
+    stdin_open: true
+    volumes:
+    - /data/proxy/letsencrypt:/etx/letsencrypt:rw
+    - /data/proxy/sites:/etc/nginx/conf.d:rw
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
