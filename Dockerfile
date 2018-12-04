@@ -5,7 +5,7 @@ LABEL maintainer="Lukáš Dorňák <lukasdornak@gmail.com>"
 
 RUN apk update; \
     apk add --update --no-cache certbot py2-pip; \
-	pip install certbot-nginx; \
+	pip install certbot-nginx;
 
 EXPOSE 80
 EXPOSE 443
