@@ -10,4 +10,4 @@ RUN apk update; \
 EXPOSE 80
 EXPOSE 443
 
-ENTRYPOINT /bin/ash
+ENTRYPOINT nginx & /bin/ash
